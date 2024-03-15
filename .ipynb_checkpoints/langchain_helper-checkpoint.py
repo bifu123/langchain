@@ -1,4 +1,4 @@
-from langchain_community.document_loaders import PyPDFLoader
+from langchain_community.document_loaders import PyPDFLoader #PDF加载器
 from langchain.indexes.vectorstore import VectorstoreIndexCreator
 from langchain.text_splitter import RecursiveCharacterTextSplitter # 分割文档
 from langchain_community.embeddings import OllamaEmbeddings # 量化文档

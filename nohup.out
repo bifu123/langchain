@@ -132,3 +132,33 @@
 [I 2024-03-15 18:52:18.552 ServerApp] Saving file at /langchain_helper.py
 [I 2024-03-15 18:52:32.187 ServerApp] Saving file at /langchain_helper.py
 [I 2024-03-15 18:52:39.866 ServerApp] Saving file at /langchain_helper.py
+[I 2024-03-15 19:00:18.508 ServerApp] 302 GET / (@192.168.170.199) 0.78ms
+[I 2024-03-15 19:00:31.400 ServerApp] 302 GET / (@192.168.170.199) 0.74ms
+[I 2024-03-15 19:00:31.581 JupyterNotebookApp] 302 GET /tree? (@192.168.170.199) 0.82ms
+[W 2024-03-15 19:00:41.092 ServerApp] 404 GET http://api.ipify.org/?format=json (@192.168.170.199) 9.44ms referer=None
+[E 2024-03-15 19:00:47.081 ServerApp] Uncaught exception in write_error
+    Traceback (most recent call last):
+      File "/home/test/.local/lib/python3.10/site-packages/tornado/web.py", line 1753, in _execute
+        raise HTTPError(405)
+    tornado.web.HTTPError: HTTP 405: Method Not Allowed
+    
+    During handling of the above exception, another exception occurred:
+    
+    Traceback (most recent call last):
+      File "/home/test/.local/lib/python3.10/site-packages/tornado/web.py", line 1298, in send_error
+        self.write_error(status_code, **kwargs)
+      File "/home/test/.local/lib/python3.10/site-packages/jupyter_server/base/handlers.py", line 719, in write_error
+        html = self.render_template("%s.html" % status_code, **ns)
+      File "/home/test/.local/lib/python3.10/site-packages/jupyter_server/base/handlers.py", line 645, in render_template
+        ns.update(self.template_namespace)
+      File "/home/test/.local/lib/python3.10/site-packages/jupyter_server/base/handlers.py", line 655, in template_namespace
+        logged_in=self.logged_in,
+      File "/home/test/.local/lib/python3.10/site-packages/jupyter_server/base/handlers.py", line 197, in logged_in
+        user = self.current_user
+      File "/home/test/.local/lib/python3.10/site-packages/tornado/web.py", line 1424, in current_user
+        self._current_user = self.get_current_user()
+      File "/home/test/.local/lib/python3.10/site-packages/jupyter_server/base/handlers.py", line 176, in get_current_user
+        raise RuntimeError(msg)
+    RuntimeError: Calling `Template404.get_current_user()` directly is deprecated in jupyter-server 2.0. Use `self.current_user` instead (works in all versions).
+[W 2024-03-15 19:00:47.082 ServerApp] 405 CONNECT www.shadowserver.org:443 (@192.168.170.199) 1.60ms referer=None
+[I 2024-03-15 19:04:01.643 ServerApp] Saving file at /langchain_helper.py
