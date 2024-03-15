@@ -1,9 +1,9 @@
 - 文档内容
 <img src="./文档内容.png">
-<br>
+
 - 问题
 <img src="./问题.png">
-<br>
+
 - 问答结果
 <img src="./问答结果.png">
 
