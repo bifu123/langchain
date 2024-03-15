@@ -23,5 +23,9 @@ ollama_server = Ollama(base_url='http://192.168.66.26:11434', model="gemma:7b")
 ```
 为内建的ollama服务器，详情参见ollama文档
 
+## 交流讨论
+QQ号：415135222
+QQ群：222302526 
+
 
 
