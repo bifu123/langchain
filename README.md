@@ -27,6 +27,7 @@ oembed_server、ollama_server 为内建的ollama服务器，详情参见ollama�
 ```bash
 python embed_docs.py
 ```
+- 注意：当文档数较多时，请注意加大 embed_docs.py 中 chunk_size=800 的值
 
 - 执行问答
 ```bash

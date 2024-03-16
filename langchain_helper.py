@@ -10,12 +10,12 @@ vectorstore_from_db = Chroma(
     persist_directory = db_path,         # Directory of db
     embedding_function = oembed_server   # Embedding model
 )
-#print(vectorstore_from_db)
+print(vectorstore_from_db)
 
 
 
 # 准备问题
-question="最大显存是多少？"
+question=input("请输入问题：")
 docs = vectorstore_from_db.similarity_search(question)
 #print(docs)
 
