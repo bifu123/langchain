@@ -37,6 +37,12 @@ python embed_docs.py
 python langchain_helper.py
 ```
 
+- 上传文档
+```bash
+python main.py
+```
+- 然后访问 http://ip:8001
+
 ## 交流讨论
 QQ号：415135222
 QQ群：222302526 
