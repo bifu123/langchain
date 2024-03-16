@@ -8,15 +8,14 @@ from langchain.chains import RetrievalQA #链
 import os
 
 
-
-#file_path = "./data/tesla_p40.pdf"
+file_path = "./data/tesla_p40.pdf"
 oembed_server = OllamaEmbeddings(base_url="http://192.168.66.24:11434", model="nomic-embed-text")
 ollama_server = Ollama(base_url='http://192.168.66.26:11434', model="gemma:7b")
-db_path = "./chroma_db"
+db_path = "./chroma_db/"
+data_directory = "./data"
 
 
 
-# 加载./data下的所有文档
 def get_all_files(directory):
     """
     递归遍历指定目录下的所有文件，并返回文件路径列表
@@ -28,33 +27,35 @@ def get_all_files(directory):
             all_files.append(file_path)
     return all_files
 
-loaders = []
-for file_name in get_all_files("./data"):
-    loaders.append(PyPDFLoader(file_name))
-    
-docs = []
-for loader in loaders:
-    docs.extend(loader.load())
-# print(len(docs))
+def vectorstore_to_db(file_paths, oembed_server, db_path):
+    """
+    将给定文件列表中的文档加工成向量，并存储到数据库中
+    """
+    for file_path in file_paths:
+        # 提取文件名（不含后缀）
+        file_name = os.path.splitext(os.path.basename(file_path))[0]
+
+        # 加载文档
+        loader = PyPDFLoader(file_path)
+        docs = loader.load()
+
+        # 分割文档
+        text_splitter = RecursiveCharacterTextSplitter(chunk_size=500, chunk_overlap=0)
+        all_splits = text_splitter.split_documents(docs)
+
+        # 量化文档存入数据库
+        Chroma.from_documents(
+            documents=all_splits,
+            embedding=oembed_server,
+            persist_directory=os.path.join(db_path, file_name)
+        )
+
+# 获取所有文件路径
+file_paths = get_all_files(data_directory)
 
 
-
-
-# 分割文档
-text_splitter = RecursiveCharacterTextSplitter(chunk_size=500, chunk_overlap=0)
-all_splits = text_splitter.split_documents(docs)
-# print(all_splits)
-
-
-
-
-#量化文档存入数据库
-vectorstore_to_db = Chroma.from_documents(
-    documents = all_splits,           # Data
-    embedding = oembed_server,        # Embedding model
-    persist_directory = db_path       # Directory to save data
-)
-
+# 执行处理
+vectorstore_to_db(file_paths, oembed_server, db_path)
 
 #加载embedding
 vectorstore_from_db = Chroma(
@@ -75,3 +76,4 @@ docs = vectorstore_from_db.similarity_search(question)
 qachain=RetrievalQA.from_chain_type(ollama_server, retriever=vectorstore_from_db.as_retriever())
 ans = qachain.invoke({"query": "请用中文回答我：" + question})
 print(ans["result"])
+
