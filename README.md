@@ -25,8 +25,8 @@ oembed_server = OllamaEmbeddings(base_url="http://192.168.66.24:11434", model="n
 ollama_server = Ollama(base_url='http://192.168.66.26:11434', model="gemma:7b")
 ```
 oembed_server、ollama_server 为内建的ollama服务器，详情参见ollama文档:<br>
-<a src="https://github.com/ollama/ollama">ollama入门</a><br>
-<a src="https://github.com/ollama/ollama/tree/main/docs">ollama文档</a>
+ollama入门：https://github.com/ollama/ollama
+ollama文档：https://github.com/ollama/ollama/tree/main/docs
 
 - 量化文档
 ```bash
