@@ -163,3 +163,88 @@
 [W 2024-03-15 19:00:47.082 ServerApp] 405 CONNECT www.shadowserver.org:443 (@192.168.170.199) 1.60ms referer=None
 [I 2024-03-15 19:04:01.643 ServerApp] Saving file at /langchain_helper.py
 [I 2024-03-15 19:10:05.896 ServerApp] Saving file at /README.md
+[I 2024-03-15 20:28:17.344 ServerApp] 302 GET / (@192.168.170.199) 0.84ms
+[E 2024-03-15 20:46:18.046 ServerApp] Uncaught exception in write_error
+    Traceback (most recent call last):
+      File "/home/test/.local/lib/python3.10/site-packages/tornado/web.py", line 1753, in _execute
+        raise HTTPError(405)
+    tornado.web.HTTPError: HTTP 405: Method Not Allowed
+    
+    During handling of the above exception, another exception occurred:
+    
+    Traceback (most recent call last):
+      File "/home/test/.local/lib/python3.10/site-packages/tornado/web.py", line 1298, in send_error
+        self.write_error(status_code, **kwargs)
+      File "/home/test/.local/lib/python3.10/site-packages/jupyter_server/base/handlers.py", line 719, in write_error
+        html = self.render_template("%s.html" % status_code, **ns)
+      File "/home/test/.local/lib/python3.10/site-packages/jupyter_server/base/handlers.py", line 645, in render_template
+        ns.update(self.template_namespace)
+      File "/home/test/.local/lib/python3.10/site-packages/jupyter_server/base/handlers.py", line 655, in template_namespace
+        logged_in=self.logged_in,
+      File "/home/test/.local/lib/python3.10/site-packages/jupyter_server/base/handlers.py", line 197, in logged_in
+        user = self.current_user
+      File "/home/test/.local/lib/python3.10/site-packages/tornado/web.py", line 1424, in current_user
+        self._current_user = self.get_current_user()
+      File "/home/test/.local/lib/python3.10/site-packages/jupyter_server/base/handlers.py", line 176, in get_current_user
+        raise RuntimeError(msg)
+    RuntimeError: Calling `Template404.get_current_user()` directly is deprecated in jupyter-server 2.0. Use `self.current_user` instead (works in all versions).
+[W 2024-03-15 20:46:18.047 ServerApp] 405 CONNECT 193.149.189.126:7227 (@192.168.170.199) 1.73ms referer=None
+[I 2024-03-15 21:53:24.813 ServerApp] 302 GET / (@192.168.170.199) 0.77ms
+[I 2024-03-16 00:08:13.795 ServerApp] 302 GET / (@192.168.170.199) 0.86ms
+[I 2024-03-16 00:08:19.808 ServerApp] 302 GET / (@192.168.170.199) 0.66ms
+[I 2024-03-16 00:08:20.244 ServerApp] Malformed HTTP message from 192.168.170.199: Malformed HTTP version in HTTP Request-Line: 'HTTP/2.0'
+[I 2024-03-16 00:08:24.703 JupyterNotebookApp] 302 GET /tree (@192.168.170.199) 0.98ms
+[I 2024-03-16 00:08:25.144 ServerApp] Malformed HTTP message from 192.168.170.199: Malformed HTTP version in HTTP Request-Line: 'HTTP/2.0'
+[I 2024-03-16 00:08:29.041 ServerApp] Malformed HTTP message from 192.168.170.199: Malformed HTTP version in HTTP Request-Line: 'HTTP/2.0'
+[I 2024-03-16 04:16:59.505 ServerApp] 302 GET / (@192.168.170.199) 0.92ms
+[I 2024-03-16 04:16:59.658 JupyterNotebookApp] 302 GET /tree? (@192.168.170.199) 0.78ms
+[I 2024-03-16 04:17:00.568 ServerApp] 302 GET / (@192.168.170.199) 0.73ms
+[I 2024-03-16 04:17:00.654 JupyterNotebookApp] 302 GET /tree? (@192.168.170.199) 0.62ms
+[I 2024-03-16 04:39:36.271 ServerApp] 302 GET / (@192.168.170.199) 0.95ms
+[E 2024-03-16 04:55:58.161 ServerApp] Uncaught exception in write_error
+    Traceback (most recent call last):
+      File "/home/test/.local/lib/python3.10/site-packages/tornado/web.py", line 1753, in _execute
+        raise HTTPError(405)
+    tornado.web.HTTPError: HTTP 405: Method Not Allowed
+    
+    During handling of the above exception, another exception occurred:
+    
+    Traceback (most recent call last):
+      File "/home/test/.local/lib/python3.10/site-packages/tornado/web.py", line 1298, in send_error
+        self.write_error(status_code, **kwargs)
+      File "/home/test/.local/lib/python3.10/site-packages/jupyter_server/base/handlers.py", line 719, in write_error
+        html = self.render_template("%s.html" % status_code, **ns)
+      File "/home/test/.local/lib/python3.10/site-packages/jupyter_server/base/handlers.py", line 645, in render_template
+        ns.update(self.template_namespace)
+      File "/home/test/.local/lib/python3.10/site-packages/jupyter_server/base/handlers.py", line 655, in template_namespace
+        logged_in=self.logged_in,
+      File "/home/test/.local/lib/python3.10/site-packages/jupyter_server/base/handlers.py", line 197, in logged_in
+        user = self.current_user
+      File "/home/test/.local/lib/python3.10/site-packages/tornado/web.py", line 1424, in current_user
+        self._current_user = self.get_current_user()
+      File "/home/test/.local/lib/python3.10/site-packages/jupyter_server/base/handlers.py", line 176, in get_current_user
+        raise RuntimeError(msg)
+    RuntimeError: Calling `Template404.get_current_user()` directly is deprecated in jupyter-server 2.0. Use `self.current_user` instead (works in all versions).
+[W 2024-03-16 04:55:58.162 ServerApp] 405 CONNECT httpbin.org:443 (@192.168.170.199) 1.68ms referer=None
+[W 2024-03-16 06:01:09.081 ServerApp] 404 GET /iptv/live/1000.json (@192.168.170.199) 2.22ms referer=None
+[W 2024-03-16 06:16:59.099 ServerApp] 404 GET /iptv/live/1000.json (@192.168.170.199) 2.20ms referer=None
+[I 2024-03-16 06:21:48.565 ServerApp] 302 GET / (@192.168.170.199) 0.89ms
+[W 2024-03-16 08:05:27.035 ServerApp] 404 GET /chs/js/lang_zh_tw.js (@192.168.170.199) 2.47ms referer=None
+[W 2024-03-16 08:05:27.118 ServerApp] 404 GET /index.php (@192.168.170.199) 1.25ms referer=None
+[I 2024-03-16 08:05:27.120 ServerApp] 302 GET / (@192.168.170.199) 0.56ms
+[W 2024-03-16 08:05:27.123 ServerApp] 404 GET /index.php (@192.168.170.199) 2.08ms referer=None
+[W 2024-03-16 08:05:27.124 ServerApp] 404 GET /public/stylesheets/theme.css (@192.168.170.199) 2.94ms referer=None
+[W 2024-03-16 08:05:27.126 ServerApp] 404 GET /customer/js/lang_zh_tw.js (@192.168.170.199) 3.63ms referer=None
+[W 2024-03-16 08:05:27.159 ServerApp] 404 GET /stylesheets/theme.css (@192.168.170.199) 1.24ms referer=None
+[W 2024-03-16 08:05:27.162 ServerApp] 404 GET /ips/index.php (@192.168.170.199) 1.26ms referer=None
+[W 2024-03-16 08:05:27.165 ServerApp] 404 GET /login/stylesheets/theme.css (@192.168.170.199) 1.25ms referer=None
+[I 2024-03-16 08:05:27.202 JupyterNotebookApp] 302 GET /tree? (@192.168.170.199) 0.66ms
+[I 2024-03-16 08:19:06.047 ServerApp] 302 GET / (@192.168.170.199) 0.86ms
+[I 2024-03-16 08:19:09.546 ServerApp] 302 GET / (@192.168.170.199) 0.68ms
+[I 2024-03-16 08:19:10.005 ServerApp] Malformed HTTP message from 192.168.170.199: Malformed HTTP version in HTTP Request-Line: 'HTTP/2.0'
+[I 2024-03-16 08:19:14.025 JupyterNotebookApp] 302 GET /tree (@192.168.170.199) 0.82ms
+[I 2024-03-16 08:19:14.628 ServerApp] Malformed HTTP message from 192.168.170.199: Malformed HTTP version in HTTP Request-Line: 'HTTP/2.0'
+[I 2024-03-16 08:19:18.583 ServerApp] Malformed HTTP message from 192.168.170.199: Malformed HTTP version in HTTP Request-Line: 'HTTP/2.0'
+[W 2024-03-16 08:24:05.265 ServerApp] 404 GET /ips/index.php (@192.168.170.199) 2.03ms referer=None
+[W 2024-03-16 08:54:43.373 ServerApp] 404 GET /index.php (@192.168.170.199) 2.18ms referer=None
+[I 2024-03-16 09:27:19.147 JupyterNotebookApp] 302 GET /tree (@192.168.170.199) 1.12ms
