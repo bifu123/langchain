@@ -13,14 +13,15 @@ vectorstore_from_db = Chroma(
 print(vectorstore_from_db)
 
 
+while True:
+    # 准备问题
+    question=input("请输入问题：")
+    # question="最大显存是多少？"
+    docs = vectorstore_from_db.similarity_search(question)
+    #print(docs)
 
-# 准备问题
-question=input("请输入问题：")
-docs = vectorstore_from_db.similarity_search(question)
-#print(docs)
 
-
-#运行链
-qachain=RetrievalQA.from_chain_type(ollama_server, retriever=vectorstore_from_db.as_retriever())
-ans = qachain.invoke({"query": "请用中文回答我：" + question})
-print(ans["result"])
+    #运行链
+    qachain=RetrievalQA.from_chain_type(ollama_server, retriever=vectorstore_from_db.as_retriever())
+    ans = qachain.invoke({"query": "请用中文回答我：" + question})
+    print(ans["result"])

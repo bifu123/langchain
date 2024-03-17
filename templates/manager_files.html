@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>File Manager</title>
+</head>
+<body>
+    <h1>文档管理</h1>
+    <hr>
+    <h3>文档上传</h3>
+    <form action="/upload/" method="post" enctype="multipart/form-data">
+        <input type="file" name="file">
+        <button type="submit">上传</button>
+    </form>
+    <h3>文档管理</h3>
+    <ul>
+        {% for file in files %}
+            <li>{{ file.name }} <a href="#" onclick="deleteFile('{{ file.name }}')">删除</a></li>
+        {% endfor %}
+    </ul>
+    <script>
+        function deleteFile(filename) {
+            if (confirm(`Are you sure you want to delete ${filename}?`)) {
+                fetch(`/delete/${filename}`, {
+                    method: 'DELETE'
+                }).then(response => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    } else {
+                        window.location.reload();
+                    }
+                }).catch(e => console.error(e));
+            }
+        }
+    </script>
+</body>
+</html>

@@ -32,18 +32,19 @@ ollama文档：https://github.com/ollama/ollama/tree/main/docs
 ```bash
 python embed_docs.py
 ```
-- 注意：当文档数较多时，请注意加大 embed_docs.py 中 chunk_size=800 的值
+*** 当文档数较多时，请注意加大 embed_docs.py 中 chunk_size=800 的值 ***
 
 - 执行问答
 ```bash
 python langchain_helper.py
 ```
 
-- 上传文档
+- 文档管理
 ```bash
 python main.py
 ```
-- 然后访问 http://ip:8001
+然后访问 http://ip:8001
+*** 上传或删除文档时都会触发自动量化文档 ***
 
 ## 交流讨论
 QQ号：415135222

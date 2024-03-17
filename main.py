@@ -1,104 +1,66 @@
-from fastapi import FastAPI, File, UploadFile
-from fastapi.responses import HTMLResponse
-from starlette.requests import Request
-from starlette.responses import StreamingResponse
-import os
+from fastapi import FastAPI, File, UploadFile, HTTPException, Request, Response
+from fastapi.responses import HTMLResponse, RedirectResponse
+from fastapi.staticfiles import StaticFiles
+from fastapi.templating import Jinja2Templates
+from pathlib import Path
+import shutil
+from fastapi import status
 from dal import *
 
 app = FastAPI()
+app.mount("/static", StaticFiles(directory="static"), name="static")
 
-file_upload_path = "./data"
+templates = Jinja2Templates(directory="templates")
 
+# 设置文件存储目录
+file_directory = Path("data")
+file_directory.mkdir(parents=True, exist_ok=True)
 
-# HTML form for uploading files
-html_form_bakjson = """
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>文件上传表单</title>
-    </head>
-    <body>
-        <h2>上传文件</h2>
-        <form action="/upload" method="post" enctype="multipart/form-data">
-            <label for="file">选择文件:</label>
-            <input type="file" id="file" name="file"><br><br>
-            <br><br>
-            <button type="submit">上传</button>
-        </form>
-    </body>
-</html>
-"""
-
-html_form = """
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>文件上传表单</title>
-    </head>
-    <body>
-        <h2>上传文件</h2>
-        <form action="/upload" method="post" enctype="multipart/form-data">
-            <label for="file">选择文件:</label>
-            <input type="file" id="file" name="file"><br><br>
-            <progress id="progressBar" value="0" max="100" style="width: 300px;"></progress>
-            <br><br>
-            <button type="submit">上传</button>
-        </form>
-
-        <script>
-            const form = document.querySelector('form');
-            const progressBar = document.querySelector('#progressBar');
-
-            form.addEventListener('submit', async (e) => {
-                e.preventDefault();
-                const formData = new FormData(form);
-                const response = await fetch('/upload', {
-                    method: 'POST',
-                    body: formData,
-                });
-                const reader = response.body.getReader();
-                const contentLength = +response.headers.get('Content-Length');
-
-                let receivedLength = 0;
-                while (true) {
-                    const { done, value } = await reader.read();
-
-                    if (done) {
-                        break;
-                    }
-
-                    receivedLength += value.length;
-                    progressBar.value = (receivedLength / contentLength) * 100;
-
-                    console.log(`Received ${receivedLength} of ${contentLength}`);
-                }
-            });
-        </script>
-    </body>
-</html>
-"""
+from fastapi import Request
 
 @app.get("/", response_class=HTMLResponse)
-async def read_form():
-    return HTMLResponse(content=html_form, status_code=200)
+def read_root(request: Request):  # 添加 request 参数
+    return templates.TemplateResponse("index.html", {"request": request})  # 将 request 添加到上下文中
 
-async def save_file(file: UploadFile, file_path: str):
-    with open(file_path, "wb") as f:
-        content = await file.read()
-        f.write(content)
+@app.post("/")
+async def dummy_post():
+    # 这是一个空的POST路由，用于处理根路径的POST请求
+    pass
 
-@app.post("/upload")
-async def upload_file(request: Request, file: UploadFile = File(...)):
-    # 设置文件保存路径
-    file_upload_target_path = os.path.join(file_upload_path, file.filename)
-    await save_file(file, file_upload_target_path)
-    # 量化文档
+
+@app.get("/manager_files", response_class=HTMLResponse)
+async def read_files(request: Request):
+    files = list(file_directory.glob("*"))
+    return templates.TemplateResponse("manager_files.html", {"request": request, "files": files})
+
+
+@app.post("/upload/")
+async def upload_file(file: UploadFile = File(...)):
+    # 将文件保存到指定目录
+    file_path = file_directory / file.filename
+    with open(file_path, "wb") as buffer:
+        shutil.copyfileobj(file.file, buffer)
+    #重新量化文档
     processor = DocumentProcessor(data_path, db_path, oembed_server)
     processor.update_database()
-    return {"filename": file.filename, "status": "ok"}
+    return RedirectResponse(url="/manager_files", status_code=status.HTTP_303_SEE_OTHER)
+
+
+@app.delete("/delete/{file_name}")
+async def delete_file(file_name: str):
+    file_path = file_directory / file_name
+    if file_path.exists():
+        file_path.unlink()
+        #重新量化文档
+        processor = DocumentProcessor(data_path, db_path, oembed_server)
+        processor.update_database()
+        return {"message": f"文件 {file_name} 删除成功"}
+        
+    else:
+        raise HTTPException(status_code=404, detail=f"文件 {file_name} 未找到")
+    
+
 
 if __name__ == "__main__":
-    import nest_asyncio
-    nest_asyncio.apply()
     import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8001)
+    uvicorn.run("main:app", host="0.0.0.0", port=8001, reload=True)
