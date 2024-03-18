@@ -43,7 +43,7 @@ python langchain_helper.py
 python main.py
 ```
 然后访问 http://ip:8001
-*** 上传或删除文档时都会触发自动量化文档 ***
+<br>*** 上传或删除文档时都会触发自动量化文档 ***
 
 ## 交流讨论
 QQ号：415135222
