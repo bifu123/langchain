@@ -1,14 +1,14 @@
 - 结构示意
-<img src="./文档对话示意.jpg">
+<img src="./images/文档对话示意.jpg">
 
 - 文档内容
-<img src="./文档内容.png">
+<img src="./images/文档内容.png">
 
 - 问题
-<img src="./问题.png">
+<img src="./images/问题.png">
 
 - 问答结果
-<img src="./问答结果.png">
+<img src="./images/问答结果.png">
 
 ## 使用方法
 ```bash
@@ -25,14 +25,13 @@ oembed_server = OllamaEmbeddings(base_url="http://192.168.66.24:11434", model="n
 ollama_server = Ollama(base_url='http://192.168.66.26:11434', model="gemma:7b")
 ```
 oembed_server、ollama_server 为内建的ollama服务器，详情参见ollama文档:<br>
-ollama入门：https://github.com/ollama/ollama
+ollama入门：https://github.com/ollama/ollama <br>
 ollama文档：https://github.com/ollama/ollama/tree/main/docs
 
 - 量化文档
 ```bash
 python embed_docs.py
 ```
-*** 当文档数较多时，请注意加大 embed_docs.py 中 chunk_size=800 的值 ***
 
 - 执行问答
 ```bash

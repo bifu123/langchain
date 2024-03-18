@@ -4,7 +4,7 @@
 from config import *
 import os
 import shutil
-from langchain_community.document_loaders import DirectoryLoader
+from langchain_community.document_loaders import DirectoryLoader, UnstructuredWordDocumentLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain_community.vectorstores import Chroma
 
@@ -17,10 +17,12 @@ class DocumentProcessor:
     def load_documents(self):
         print("正在加载" + self.data_path + "下的所有文档...")
         loader = DirectoryLoader(self.data_path, show_progress=True, use_multithreading=True)
+        print("半小时                                                                                                                                                                                                                                                                                          5")
+        print(loader.load())
         return loader.load()
 
     def split_documents(self, docs):
-        text_splitter = RecursiveCharacterTextSplitter(chunk_size=2000, chunk_overlap=200)
+        text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=200)
         return text_splitter.split_documents(docs)
 
     def clean_db_path(self):

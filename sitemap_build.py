@@ -1,66 +1,12 @@
-from config import *
-import os
-import shutil
-from langchain_community.document_loaders import DirectoryLoader, UnstructuredWordDocumentLoader
-from langchain.text_splitter import RecursiveCharacterTextSplitter
-from langchain_community.vectorstores import Chroma
-
+#!/usr/bin/python3
+# -*- coding: utf-8 -*-
+# author=He
 
 import xml.dom.minidom
 import datetime
 from urllib import request
 from bs4 import BeautifulSoup
 
-
-######################################
-# 量化文档
-######################################
-class DocumentProcessor:
-    def __init__(self, data_path, db_path, oembed_server):
-        self.data_path = data_path
-        self.db_path = db_path
-        self.oembed_server = oembed_server
-
-    def load_documents(self):
-        print("正在加载" + self.data_path + "下的所有文档...")
-        loader = DirectoryLoader(self.data_path, show_progress=True, use_multithreading=True)
-        return loader.load()
-
-    def split_documents(self, docs):
-        text_splitter = RecursiveCharacterTextSplitter(chunk_size=1024, chunk_overlap=128)
-        return text_splitter.split_documents(docs)
-
-    def clean_db_path(self):
-        if os.path.exists(self.db_path) and os.path.isdir(self.db_path):
-            try:
-                shutil.rmtree(self.db_path)
-                print(f"文件夹 '{self.db_path}' 已成功删除。")
-            except OSError as e:
-                print(f"删除文件夹 '{self.db_path}' 时发生错误：{e}")
-        else:
-            print(f"文件夹 '{self.db_path}' 不存在，无需删除。")
-
-    def update_database(self):
-        docs = self.load_documents()
-        all_splits = self.split_documents(docs)
-        self.clean_db_path()
-        vectorstore_to_db = Chroma.from_documents(
-            documents=all_splits,
-            embedding=self.oembed_server,
-            persist_directory=self.db_path
-        )
-        print("==========================================\n数据已更新，保存在：", self.db_path)
-
-# 使用示例
-# processor = DocumentProcessor(data_path, db_path, oembed_server)
-# processor.update_database()
-
-
-
-
-######################################
-# 生成站点地图
-######################################
 '''要执行的url'''
 URL = 'http://cho.freesky.sbs'
 
@@ -75,21 +21,37 @@ def build_sitemap(url):
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) \ AppleWeb\Kit/537.36 (KHTML, like Gecko)\ '
                       'Chrome/58.0.3029.110 Safari/537.36'}
 
-    def get_http(url, headers=None, charset='utf8'):
-        """
-        发送请求
-        :param url:
-        :param headers:
-        :param charset:
-        :return:
-        """
+    # def get_http(url, headers=None, charset='utf8'):
+    #     """
+    #     发送请求
+    #     :param url:
+    #     :param headers:
+    #     :param charset:
+    #     :return:
+    #     """
+    #     if headers is None:
+    #         headers = {}
+    #     try:
+    #         return request.urlopen(request.Request(url=url, headers=headers)).read().decode(charset)
+    #     except Exception:
+    #         pass
+    #     return ''
+    
+    
+    
+    def get_http(url, headers=None, charset='gbk'):
         if headers is None:
             headers = {}
         try:
-            return request.urlopen(request.Request(url=url, headers=headers)).read().decode(charset)
-        except Exception:
-            pass
+            response = request.urlopen(request.Request(url=url, headers=headers))
+            return response.read().decode(charset, errors='ignore')
+        except Exception as e:
+            print("Error occurred while fetching URL:", e)
         return ''
+
+        
+    
+    
 
     def open_url(url):
         """
@@ -161,8 +123,5 @@ def build_sitemap(url):
     return {"url":url, "sitemap":"./sitemap.xml"}
 
 
-# # 调用函数并输出结果
-# print(build_sitemap(URL))
-
-
-
+# 调用函数并输出结果
+print(build_sitemap(URL))
