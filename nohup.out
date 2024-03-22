@@ -1,0 +1,250 @@
+[I 2024-03-15 17:57:10.757 ServerApp] jupyter_lsp | extension was successfully linked.
+[I 2024-03-15 17:57:10.765 ServerApp] jupyter_server_terminals | extension was successfully linked.
+[I 2024-03-15 17:57:10.774 ServerApp] jupyterlab | extension was successfully linked.
+[W 2024-03-15 17:57:10.778 JupyterNotebookApp] 'ip' has moved from NotebookApp to ServerApp. This config will be passed to ServerApp. Be sure to update your config before our next release.
+[W 2024-03-15 17:57:10.778 JupyterNotebookApp] 'ip' has moved from NotebookApp to ServerApp. This config will be passed to ServerApp. Be sure to update your config before our next release.
+[W 2024-03-15 17:57:10.778 JupyterNotebookApp] 'port' has moved from NotebookApp to ServerApp. This config will be passed to ServerApp. Be sure to update your config before our next release.
+[I 2024-03-15 17:57:10.784 ServerApp] notebook | extension was successfully linked.
+[I 2024-03-15 17:57:11.136 ServerApp] notebook_shim | extension was successfully linked.
+[I 2024-03-15 17:57:11.162 ServerApp] notebook_shim | extension was successfully loaded.
+[I 2024-03-15 17:57:11.166 ServerApp] jupyter_lsp | extension was successfully loaded.
+[I 2024-03-15 17:57:11.167 ServerApp] jupyter_server_terminals | extension was successfully loaded.
+[I 2024-03-15 17:57:11.170 LabApp] JupyterLab extension loaded from /home/test/.local/lib/python3.10/site-packages/jupyterlab
+[I 2024-03-15 17:57:11.170 LabApp] JupyterLab application directory is /home/test/.local/share/jupyter/lab
+[I 2024-03-15 17:57:11.171 LabApp] Extension Manager is 'pypi'.
+[I 2024-03-15 17:57:11.251 ServerApp] jupyterlab | extension was successfully loaded.
+[I 2024-03-15 17:57:11.256 ServerApp] notebook | extension was successfully loaded.
+[I 2024-03-15 17:57:11.257 ServerApp] Serving notebooks from local directory: /home/test/langchain
+[I 2024-03-15 17:57:11.257 ServerApp] Jupyter Server 2.12.5 is running at:
+[I 2024-03-15 17:57:11.257 ServerApp] http://python:8888/tree
+[I 2024-03-15 17:57:11.257 ServerApp]     http://127.0.0.1:8888/tree
+[I 2024-03-15 17:57:11.257 ServerApp] Use Control-C to stop this server and shut down all kernels (twice to skip confirmation).
+[I 2024-03-15 17:57:11.306 ServerApp] Skipped non-installed server(s): bash-language-server, dockerfile-language-server-nodejs, javascript-typescript-langserver, jedi-language-server, julia-language-server, pyright, python-language-server, python-lsp-server, r-languageserver, sql-language-server, texlab, typescript-language-server, unified-language-server, vscode-css-languageserver-bin, vscode-html-languageserver-bin, vscode-json-languageserver-bin, yaml-language-server
+[W 2024-03-15 17:57:51.309 LabApp] Could not determine jupyterlab build status without nodejs
+[W 2024-03-15 17:57:51.824 ServerApp] 404 GET /api/contents/vectordb_with_chroma.ipynb?content=0&hash=0&1710496733460 (b1782f4c700a4f1bae24b15c9affa49c@192.168.2.16) 2.15ms referer=http://192.168.65.23:8888/lab
+[W 2024-03-15 17:57:51.824 ServerApp] 404 GET /api/contents/vectordb_with_chroma.ipynb?content=0&hash=0&1710496733460 (192.168.2.16): No such file or directory: vectordb_with_chroma.ipynb
+[W 2024-03-15 17:57:51.827 ServerApp] 404 GET /api/contents/study_langchain_gemini.ipynb?content=0&hash=0&1710496733461 (b1782f4c700a4f1bae24b15c9affa49c@192.168.2.16) 2.59ms referer=http://192.168.65.23:8888/lab
+[W 2024-03-15 17:57:51.827 ServerApp] 404 GET /api/contents/study_langchain_gemini.ipynb?content=0&hash=0&1710496733461 (192.168.2.16): No such file or directory: study_langchain_gemini.ipynb
+[W 2024-03-15 17:57:51.832 ServerApp] 404 GET /api/contents/app.py?content=0&hash=0&1710496733462 (b1782f4c700a4f1bae24b15c9affa49c@192.168.2.16) 1.90ms referer=http://192.168.65.23:8888/lab
+[W 2024-03-15 17:57:51.832 ServerApp] 404 GET /api/contents/app.py?content=0&hash=0&1710496733462 (192.168.2.16): No such file or directory: app.py
+[I 2024-03-15 17:57:51.866 ServerApp] New terminal with automatic name: 1
+[E 2024-03-15 18:01:32.797 ServerApp] Uncaught exception in write_error
+    Traceback (most recent call last):
+      File "/home/test/.local/lib/python3.10/site-packages/tornado/web.py", line 1753, in _execute
+        raise HTTPError(405)
+    tornado.web.HTTPError: HTTP 405: Method Not Allowed
+    
+    During handling of the above exception, another exception occurred:
+    
+    Traceback (most recent call last):
+      File "/home/test/.local/lib/python3.10/site-packages/tornado/web.py", line 1298, in send_error
+        self.write_error(status_code, **kwargs)
+      File "/home/test/.local/lib/python3.10/site-packages/jupyter_server/base/handlers.py", line 719, in write_error
+        html = self.render_template("%s.html" % status_code, **ns)
+      File "/home/test/.local/lib/python3.10/site-packages/jupyter_server/base/handlers.py", line 645, in render_template
+        ns.update(self.template_namespace)
+      File "/home/test/.local/lib/python3.10/site-packages/jupyter_server/base/handlers.py", line 655, in template_namespace
+        logged_in=self.logged_in,
+      File "/home/test/.local/lib/python3.10/site-packages/jupyter_server/base/handlers.py", line 197, in logged_in
+        user = self.current_user
+      File "/home/test/.local/lib/python3.10/site-packages/tornado/web.py", line 1424, in current_user
+        self._current_user = self.get_current_user()
+      File "/home/test/.local/lib/python3.10/site-packages/jupyter_server/base/handlers.py", line 176, in get_current_user
+        raise RuntimeError(msg)
+    RuntimeError: Calling `Template404.get_current_user()` directly is deprecated in jupyter-server 2.0. Use `self.current_user` instead (works in all versions).
+[W 2024-03-15 18:01:32.799 ServerApp] 405 CONNECT 45.61.137.126:7227 (@192.168.170.199) 3.09ms referer=None
+[I 2024-03-15 18:08:34.710 ServerApp] Saving file at /main.py
+[I 2024-03-15 18:10:41.399 ServerApp] Saving file at /langchain_helper.py
+[I 2024-03-15 18:10:55.750 ServerApp] Saving file at /langchain_helper.py
+[I 2024-03-15 18:12:25.503 ServerApp] Saving file at /langchain_helper.py
+[I 2024-03-15 18:12:45.294 ServerApp] Saving file at /langchain_helper.py
+[I 2024-03-15 18:13:01.992 ServerApp] Saving file at /langchain_helper.py
+[I 2024-03-15 18:13:10.368 ServerApp] Saving file at /langchain_helper.py
+[I 2024-03-15 18:13:19.132 ServerApp] Saving file at /langchain_helper.py
+[I 2024-03-15 18:15:02.245 ServerApp] Saving file at /langchain_helper.py
+[I 2024-03-15 18:15:40.842 ServerApp] Saving file at /langchain_helper.py
+[I 2024-03-15 18:15:59.512 ServerApp] Saving file at /langchain_helper.py
+[I 2024-03-15 18:16:11.215 ServerApp] Saving file at /langchain_helper.py
+[I 2024-03-15 18:16:35.644 ServerApp] Saving file at /langchain_helper.py
+[I 2024-03-15 18:18:21.908 ServerApp] Saving file at /langchain_helper.py
+[I 2024-03-15 18:18:27.508 ServerApp] Saving file at /langchain_helper.py
+[I 2024-03-15 18:18:38.939 ServerApp] Saving file at /langchain_helper.py
+[I 2024-03-15 18:18:51.221 ServerApp] Saving file at /langchain_helper.py
+[I 2024-03-15 18:19:09.324 ServerApp] Saving file at /langchain_helper.py
+[I 2024-03-15 18:19:44.127 ServerApp] Saving file at /langchain_helper.py
+[I 2024-03-15 18:20:13.899 ServerApp] Saving file at /langchain_helper.py
+[I 2024-03-15 18:20:26.221 ServerApp] Saving file at /langchain_helper.py
+[I 2024-03-15 18:21:34.460 ServerApp] Saving file at /langchain_helper.py
+[I 2024-03-15 18:21:40.883 ServerApp] Saving file at /langchain_helper.py
+[I 2024-03-15 18:23:03.127 ServerApp] Saving file at /langchain_helper.py
+[I 2024-03-15 18:23:35.233 ServerApp] Saving file at /langchain_helper.py
+[I 2024-03-15 18:23:43.156 ServerApp] Saving file at /langchain_helper.py
+[I 2024-03-15 18:24:28.103 ServerApp] Saving file at /langchain_helper.py
+[I 2024-03-15 18:25:45.175 ServerApp] Saving file at /langchain_helper.py
+[I 2024-03-15 18:26:24.896 ServerApp] Saving file at /langchain_helper.py
+[I 2024-03-15 18:26:29.552 ServerApp] Saving file at /langchain_helper.py
+[I 2024-03-15 18:27:02.783 ServerApp] Saving file at /langchain_helper.py
+[I 2024-03-15 18:27:33.952 ServerApp] Saving file at /langchain_helper.py
+[I 2024-03-15 18:28:33.157 ServerApp] Saving file at /langchain_helper.py
+[I 2024-03-15 18:28:50.104 ServerApp] Saving file at /langchain_helper.py
+[I 2024-03-15 18:37:53.959 ServerApp] Creating new file in 
+[I 2024-03-15 18:38:19.794 ServerApp] Saving file at /langchain_bak.py
+[I 2024-03-15 18:38:26.352 ServerApp] Saving file at /langchain_bak.py
+[I 2024-03-15 18:39:28.983 ServerApp] Saving file at /langchain_bak.py
+[I 2024-03-15 18:40:50.478 ServerApp] Saving file at /langchain_bak.py
+[I 2024-03-15 18:41:07.219 ServerApp] Saving file at /langchain_bak.py
+[I 2024-03-15 18:41:26.209 ServerApp] Saving file at /langchain_bak.py
+[I 2024-03-15 18:41:37.829 ServerApp] Saving file at /langchain_bak.py
+[I 2024-03-15 18:41:40.712 ServerApp] Saving file at /langchain_bak.py
+[I 2024-03-15 18:41:48.728 ServerApp] Saving file at /langchain_bak.py
+[I 2024-03-15 18:42:08.833 ServerApp] Saving file at /langchain_bak.py
+[I 2024-03-15 18:42:21.703 ServerApp] Saving file at /langchain_bak.py
+[I 2024-03-15 18:43:00.420 ServerApp] 302 GET / (@192.168.170.199) 0.78ms
+[I 2024-03-15 18:43:00.583 JupyterNotebookApp] 302 GET /tree? (@192.168.170.199) 0.87ms
+[I 2024-03-15 18:43:18.359 ServerApp] Saving file at /langchain_bak.py
+[I 2024-03-15 18:43:22.886 ServerApp] Saving file at /langchain_bak.py
+[I 2024-03-15 18:43:27.759 ServerApp] Saving file at /langchain_bak.py
+[I 2024-03-15 18:44:19.112 ServerApp] Saving file at /langchain_bak.py
+[I 2024-03-15 18:44:31.797 ServerApp] Saving file at /langchain_bak.py
+[I 2024-03-15 18:45:08.283 ServerApp] Saving file at /langchain_bak.py
+[I 2024-03-15 18:45:15.969 ServerApp] Saving file at /langchain_bak.py
+[I 2024-03-15 18:45:36.389 ServerApp] Saving file at /langchain_bak.py
+[I 2024-03-15 18:46:23.552 ServerApp] Saving file at /langchain_bak.py
+[I 2024-03-15 18:47:05.374 ServerApp] Saving file at /langchain_bak.py
+[I 2024-03-15 18:47:09.548 ServerApp] Saving file at /langchain_bak.py
+[I 2024-03-15 18:47:48.870 ServerApp] Saving file at /langchain_bak.py
+[I 2024-03-15 18:48:27.332 ServerApp] Saving file at /langchain_bak.py
+[I 2024-03-15 18:48:42.336 ServerApp] Saving file at /langchain_bak.py
+[I 2024-03-15 18:49:04.609 ServerApp] Saving file at /langchain_bak.py
+[I 2024-03-15 18:49:11.492 ServerApp] Saving file at /langchain_helper.py
+[I 2024-03-15 18:49:26.517 ServerApp] Saving file at /langchain_helper.py
+[I 2024-03-15 18:49:29.498 ServerApp] Saving file at /langchain_helper.py
+[I 2024-03-15 18:49:34.391 ServerApp] Saving file at /langchain_helper.py
+[I 2024-03-15 18:49:42.099 ServerApp] Saving file at /langchain_helper.py
+[I 2024-03-15 18:49:53.654 ServerApp] Saving file at /langchain_helper.py
+[I 2024-03-15 18:49:57.434 ServerApp] Saving file at /langchain_helper.py
+[I 2024-03-15 18:50:29.895 ServerApp] Saving file at /langchain_helper.py
+[I 2024-03-15 18:50:37.430 ServerApp] Saving file at /langchain_helper.py
+[W 2024-03-15 18:50:46.056 ServerApp] delete /langchain_bak.py
+[I 2024-03-15 18:50:47.951 ServerApp] Saving file at /langchain_helper.py
+[I 2024-03-15 18:51:26.532 ServerApp] Saving file at /langchain_helper.py
+[I 2024-03-15 18:51:31.457 ServerApp] Saving file at /langchain_helper.py
+[I 2024-03-15 18:52:18.552 ServerApp] Saving file at /langchain_helper.py
+[I 2024-03-15 18:52:32.187 ServerApp] Saving file at /langchain_helper.py
+[I 2024-03-15 18:52:39.866 ServerApp] Saving file at /langchain_helper.py
+[I 2024-03-15 19:00:18.508 ServerApp] 302 GET / (@192.168.170.199) 0.78ms
+[I 2024-03-15 19:00:31.400 ServerApp] 302 GET / (@192.168.170.199) 0.74ms
+[I 2024-03-15 19:00:31.581 JupyterNotebookApp] 302 GET /tree? (@192.168.170.199) 0.82ms
+[W 2024-03-15 19:00:41.092 ServerApp] 404 GET http://api.ipify.org/?format=json (@192.168.170.199) 9.44ms referer=None
+[E 2024-03-15 19:00:47.081 ServerApp] Uncaught exception in write_error
+    Traceback (most recent call last):
+      File "/home/test/.local/lib/python3.10/site-packages/tornado/web.py", line 1753, in _execute
+        raise HTTPError(405)
+    tornado.web.HTTPError: HTTP 405: Method Not Allowed
+    
+    During handling of the above exception, another exception occurred:
+    
+    Traceback (most recent call last):
+      File "/home/test/.local/lib/python3.10/site-packages/tornado/web.py", line 1298, in send_error
+        self.write_error(status_code, **kwargs)
+      File "/home/test/.local/lib/python3.10/site-packages/jupyter_server/base/handlers.py", line 719, in write_error
+        html = self.render_template("%s.html" % status_code, **ns)
+      File "/home/test/.local/lib/python3.10/site-packages/jupyter_server/base/handlers.py", line 645, in render_template
+        ns.update(self.template_namespace)
+      File "/home/test/.local/lib/python3.10/site-packages/jupyter_server/base/handlers.py", line 655, in template_namespace
+        logged_in=self.logged_in,
+      File "/home/test/.local/lib/python3.10/site-packages/jupyter_server/base/handlers.py", line 197, in logged_in
+        user = self.current_user
+      File "/home/test/.local/lib/python3.10/site-packages/tornado/web.py", line 1424, in current_user
+        self._current_user = self.get_current_user()
+      File "/home/test/.local/lib/python3.10/site-packages/jupyter_server/base/handlers.py", line 176, in get_current_user
+        raise RuntimeError(msg)
+    RuntimeError: Calling `Template404.get_current_user()` directly is deprecated in jupyter-server 2.0. Use `self.current_user` instead (works in all versions).
+[W 2024-03-15 19:00:47.082 ServerApp] 405 CONNECT www.shadowserver.org:443 (@192.168.170.199) 1.60ms referer=None
+[I 2024-03-15 19:04:01.643 ServerApp] Saving file at /langchain_helper.py
+[I 2024-03-15 19:10:05.896 ServerApp] Saving file at /README.md
+[I 2024-03-15 20:28:17.344 ServerApp] 302 GET / (@192.168.170.199) 0.84ms
+[E 2024-03-15 20:46:18.046 ServerApp] Uncaught exception in write_error
+    Traceback (most recent call last):
+      File "/home/test/.local/lib/python3.10/site-packages/tornado/web.py", line 1753, in _execute
+        raise HTTPError(405)
+    tornado.web.HTTPError: HTTP 405: Method Not Allowed
+    
+    During handling of the above exception, another exception occurred:
+    
+    Traceback (most recent call last):
+      File "/home/test/.local/lib/python3.10/site-packages/tornado/web.py", line 1298, in send_error
+        self.write_error(status_code, **kwargs)
+      File "/home/test/.local/lib/python3.10/site-packages/jupyter_server/base/handlers.py", line 719, in write_error
+        html = self.render_template("%s.html" % status_code, **ns)
+      File "/home/test/.local/lib/python3.10/site-packages/jupyter_server/base/handlers.py", line 645, in render_template
+        ns.update(self.template_namespace)
+      File "/home/test/.local/lib/python3.10/site-packages/jupyter_server/base/handlers.py", line 655, in template_namespace
+        logged_in=self.logged_in,
+      File "/home/test/.local/lib/python3.10/site-packages/jupyter_server/base/handlers.py", line 197, in logged_in
+        user = self.current_user
+      File "/home/test/.local/lib/python3.10/site-packages/tornado/web.py", line 1424, in current_user
+        self._current_user = self.get_current_user()
+      File "/home/test/.local/lib/python3.10/site-packages/jupyter_server/base/handlers.py", line 176, in get_current_user
+        raise RuntimeError(msg)
+    RuntimeError: Calling `Template404.get_current_user()` directly is deprecated in jupyter-server 2.0. Use `self.current_user` instead (works in all versions).
+[W 2024-03-15 20:46:18.047 ServerApp] 405 CONNECT 193.149.189.126:7227 (@192.168.170.199) 1.73ms referer=None
+[I 2024-03-15 21:53:24.813 ServerApp] 302 GET / (@192.168.170.199) 0.77ms
+[I 2024-03-16 00:08:13.795 ServerApp] 302 GET / (@192.168.170.199) 0.86ms
+[I 2024-03-16 00:08:19.808 ServerApp] 302 GET / (@192.168.170.199) 0.66ms
+[I 2024-03-16 00:08:20.244 ServerApp] Malformed HTTP message from 192.168.170.199: Malformed HTTP version in HTTP Request-Line: 'HTTP/2.0'
+[I 2024-03-16 00:08:24.703 JupyterNotebookApp] 302 GET /tree (@192.168.170.199) 0.98ms
+[I 2024-03-16 00:08:25.144 ServerApp] Malformed HTTP message from 192.168.170.199: Malformed HTTP version in HTTP Request-Line: 'HTTP/2.0'
+[I 2024-03-16 00:08:29.041 ServerApp] Malformed HTTP message from 192.168.170.199: Malformed HTTP version in HTTP Request-Line: 'HTTP/2.0'
+[I 2024-03-16 04:16:59.505 ServerApp] 302 GET / (@192.168.170.199) 0.92ms
+[I 2024-03-16 04:16:59.658 JupyterNotebookApp] 302 GET /tree? (@192.168.170.199) 0.78ms
+[I 2024-03-16 04:17:00.568 ServerApp] 302 GET / (@192.168.170.199) 0.73ms
+[I 2024-03-16 04:17:00.654 JupyterNotebookApp] 302 GET /tree? (@192.168.170.199) 0.62ms
+[I 2024-03-16 04:39:36.271 ServerApp] 302 GET / (@192.168.170.199) 0.95ms
+[E 2024-03-16 04:55:58.161 ServerApp] Uncaught exception in write_error
+    Traceback (most recent call last):
+      File "/home/test/.local/lib/python3.10/site-packages/tornado/web.py", line 1753, in _execute
+        raise HTTPError(405)
+    tornado.web.HTTPError: HTTP 405: Method Not Allowed
+    
+    During handling of the above exception, another exception occurred:
+    
+    Traceback (most recent call last):
+      File "/home/test/.local/lib/python3.10/site-packages/tornado/web.py", line 1298, in send_error
+        self.write_error(status_code, **kwargs)
+      File "/home/test/.local/lib/python3.10/site-packages/jupyter_server/base/handlers.py", line 719, in write_error
+        html = self.render_template("%s.html" % status_code, **ns)
+      File "/home/test/.local/lib/python3.10/site-packages/jupyter_server/base/handlers.py", line 645, in render_template
+        ns.update(self.template_namespace)
+      File "/home/test/.local/lib/python3.10/site-packages/jupyter_server/base/handlers.py", line 655, in template_namespace
+        logged_in=self.logged_in,
+      File "/home/test/.local/lib/python3.10/site-packages/jupyter_server/base/handlers.py", line 197, in logged_in
+        user = self.current_user
+      File "/home/test/.local/lib/python3.10/site-packages/tornado/web.py", line 1424, in current_user
+        self._current_user = self.get_current_user()
+      File "/home/test/.local/lib/python3.10/site-packages/jupyter_server/base/handlers.py", line 176, in get_current_user
+        raise RuntimeError(msg)
+    RuntimeError: Calling `Template404.get_current_user()` directly is deprecated in jupyter-server 2.0. Use `self.current_user` instead (works in all versions).
+[W 2024-03-16 04:55:58.162 ServerApp] 405 CONNECT httpbin.org:443 (@192.168.170.199) 1.68ms referer=None
+[W 2024-03-16 06:01:09.081 ServerApp] 404 GET /iptv/live/1000.json (@192.168.170.199) 2.22ms referer=None
+[W 2024-03-16 06:16:59.099 ServerApp] 404 GET /iptv/live/1000.json (@192.168.170.199) 2.20ms referer=None
+[I 2024-03-16 06:21:48.565 ServerApp] 302 GET / (@192.168.170.199) 0.89ms
+[W 2024-03-16 08:05:27.035 ServerApp] 404 GET /chs/js/lang_zh_tw.js (@192.168.170.199) 2.47ms referer=None
+[W 2024-03-16 08:05:27.118 ServerApp] 404 GET /index.php (@192.168.170.199) 1.25ms referer=None
+[I 2024-03-16 08:05:27.120 ServerApp] 302 GET / (@192.168.170.199) 0.56ms
+[W 2024-03-16 08:05:27.123 ServerApp] 404 GET /index.php (@192.168.170.199) 2.08ms referer=None
+[W 2024-03-16 08:05:27.124 ServerApp] 404 GET /public/stylesheets/theme.css (@192.168.170.199) 2.94ms referer=None
+[W 2024-03-16 08:05:27.126 ServerApp] 404 GET /customer/js/lang_zh_tw.js (@192.168.170.199) 3.63ms referer=None
+[W 2024-03-16 08:05:27.159 ServerApp] 404 GET /stylesheets/theme.css (@192.168.170.199) 1.24ms referer=None
+[W 2024-03-16 08:05:27.162 ServerApp] 404 GET /ips/index.php (@192.168.170.199) 1.26ms referer=None
+[W 2024-03-16 08:05:27.165 ServerApp] 404 GET /login/stylesheets/theme.css (@192.168.170.199) 1.25ms referer=None
+[I 2024-03-16 08:05:27.202 JupyterNotebookApp] 302 GET /tree? (@192.168.170.199) 0.66ms
+[I 2024-03-16 08:19:06.047 ServerApp] 302 GET / (@192.168.170.199) 0.86ms
+[I 2024-03-16 08:19:09.546 ServerApp] 302 GET / (@192.168.170.199) 0.68ms
+[I 2024-03-16 08:19:10.005 ServerApp] Malformed HTTP message from 192.168.170.199: Malformed HTTP version in HTTP Request-Line: 'HTTP/2.0'
+[I 2024-03-16 08:19:14.025 JupyterNotebookApp] 302 GET /tree (@192.168.170.199) 0.82ms
+[I 2024-03-16 08:19:14.628 ServerApp] Malformed HTTP message from 192.168.170.199: Malformed HTTP version in HTTP Request-Line: 'HTTP/2.0'
+[I 2024-03-16 08:19:18.583 ServerApp] Malformed HTTP message from 192.168.170.199: Malformed HTTP version in HTTP Request-Line: 'HTTP/2.0'
+[W 2024-03-16 08:24:05.265 ServerApp] 404 GET /ips/index.php (@192.168.170.199) 2.03ms referer=None
+[W 2024-03-16 08:54:43.373 ServerApp] 404 GET /index.php (@192.168.170.199) 2.18ms referer=None
+[I 2024-03-16 09:27:19.147 JupyterNotebookApp] 302 GET /tree (@192.168.170.199) 1.12ms
