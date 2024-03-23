@@ -1,18 +1,60 @@
-#########################################
-#当文档数较多时，请注意加大chunk_size=800的值
-#########################################
-from config import *
+#################### 导入包 ##################
 import os
 import shutil
+
+from config import *
+
+
+# 文档加工
 from langchain_community.document_loaders import DirectoryLoader, UnstructuredWordDocumentLoader
-from langchain.text_splitter import RecursiveCharacterTextSplitter
-from langchain_community.vectorstores import Chroma
+from langchain.indexes.vectorstore import VectorstoreIndexCreator
+from langchain.text_splitter import RecursiveCharacterTextSplitter # 分割文档
+from langchain_community.vectorstores import Chroma # 量化文档数据库
+
+# ollama模型
+from langchain_community.embeddings import OllamaEmbeddings # 量化文档
+from langchain_community.llms import Ollama #模型
+
+# gemini模型
+from langchain_google_genai import GoogleGenerativeAIEmbeddings
+from langchain_google_genai import ChatGoogleGenerativeAI
+
+
+
+
+
+
+
+
+
+os.environ['GOOGLE_API_KEY'] = GOOGLE_API_KEY #将GOOGLE_API_KEY加载到环境变量中
+
+# 本地量化模型
+embedding_ollama = OllamaEmbeddings(
+    base_url = embedding_ollama_conf["base_url"], 
+    model = embedding_ollama_conf["model"]
+) 
+# #线上google量化模型
+embedding_google = GoogleGenerativeAIEmbeddings(
+    model=embedding_google_conf["model"]
+) 
+# #embedding_google.embed_query("hello, world!")
+
+
+# 选择量化模型
+if model_choice["embedding"] == "ollama":
+    embedding = embedding_ollama
+else:
+    embedding = embedding_google
+
+
+
 
 class DocumentProcessor:
-    def __init__(self, data_path, db_path, oembed_server):
+    def __init__(self, data_path, db_path, embedding):
         self.data_path = data_path
         self.db_path = db_path
-        self.oembed_server = oembed_server
+        self.embedding = embedding
 
     def load_documents(self):
         print("正在加载" + self.data_path + "下的所有文档...")
@@ -41,13 +83,13 @@ class DocumentProcessor:
         self.clean_db_path()
         vectorstore_to_db = Chroma.from_documents(
             documents=all_splits,
-            embedding=self.oembed_server,
+            embedding=self.embedding,
             persist_directory=self.db_path
         )
         print("==========================================\n数据已更新，保存在：", self.db_path)
 
 # 使用示例
-processor = DocumentProcessor(data_path, db_path, oembed_server)
+processor = DocumentProcessor(data_path, db_path, embedding)
 processor.update_database()
 
 

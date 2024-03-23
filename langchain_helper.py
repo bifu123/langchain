@@ -1,65 +1,44 @@
-from langchain_community.vectorstores import Chroma # 量化文档数据库
-from langchain.chains import RetrievalQA #链
-
-from langchain_core.runnables import RunnablePassthrough
-from langchain.schema import StrOutputParser
-from langchain import hub
-
-import shutil
-import os
-from config import *
+from dal import *
 
 
 #加载embedding
 vectorstore_from_db = Chroma(
     persist_directory = db_path,         # Directory of db
-    embedding_function = oembed_server   # Embedding model
+    embedding_function = embedding   # Embedding model
 )
 retriever = vectorstore_from_db.as_retriever()
 # print(retriever)
 
 
 
-# # 准备问题
-# #question=input("请输入问题：")
-# question="李四是多少分？"
-# docs = vectorstore_from_db.similarity_search(question)
-# print("===============将在这些词块中匹配：=================\r\n",docs)
+#################### 问答推理 ##################
+#创建prompt模板
+template = """Answer the question a full sentence, based only on the following context and tel me the answer in Chinese:
+{context}
+Question: {question}
+"""
 
+template_cn = """请根据以下上下文完整地回答问题，并用中文告诉我答案:
+{context}
+{question}
+"""
 
-# #运行链
-# qachain=RetrievalQA.from_chain_type(ollama_server, retriever=retriever)
-# ans = qachain.invoke({"query": "请根据上下文回答：" + question})
-# print(ans["result"])
+#由模板生成prompt
+prompt = ChatPromptTemplate.from_template(template) 
 
+retriever=vectorstore_from_db.as_retriever()
+output_parser = StrOutputParser()
 
-
-
-# 设置问题和ChatModel
-prompt = hub.pull("rlm/rag-prompt")
-
-# 创建RAG链
-def format_docs(docs):
-    return "\n\n".join(doc.page_content for doc in docs)
-rag_chain = (
-    {"context": retriever, "question": RunnablePassthrough()}  # 
-    | prompt
-    | ollama_server
-    | StrOutputParser()
-)
-
-
-# 回答问题
-def make_answer(question):
-    #question = "李四的分数是多少?"
-    answer = rag_chain.invoke("请用中文回答我：" + question)
-    return answer
-
-
+ 
+#创建chain
+chain = RunnableMap({
+    "context": lambda x: retriever.get_relevant_documents(x["question"]),
+    "question": RunnablePassthrough()
+}) | prompt | llm | output_parser
+ 
 while True:
-    question = input("请输入问题：")
-    ans = make_answer(question)
-    print(ans)
+    q_input = input("请输入问题：")
+    query = {"question": q_input}
+    print(chain.invoke(query))
     
-#清理
-vectorstore_from_db.delete_collection()
+    # vectorstore_from_db.delete_collection()

@@ -11,6 +11,24 @@
 <img src="./images/问答结果.png">
 
 ## 使用方法
+### 安装 Visual Studio Build Tools 
+- 您可以从 Microsoft 的官方网站上下载 Visual Studio Build Tools。以下是下载的步骤：
+
+- 打开您的 Web 浏览器并访问 Microsoft 的 Visual Studio 下载页面：https://visualstudio.microsoft.com/downloads/。
+
+- 在该页面上，您会看到不同版本的 Visual Studio 可供下载。您可以滚动页面找到 "All downloads" 部分，或者直接在搜索栏中搜索 "Build Tools"。
+
+- 找到 "Tools for Visual Studio" 或者 "Build Tools for Visual Studio"。点击进入该部分。
+
+- 您会看到不同版本的 Visual Studio Build Tools。选择您想要的版本，并点击相应的下载按钮。
+
+- 在下载页面上，您可能需要登录您的 Microsoft 帐户。如果您还没有 Microsoft 帐户，可以免费注册一个。
+
+- 下载完成后，运行安装程序，并按照提示完成安装过程。您可以根据您的需要选择要安装的组件和工作负载。
+
+- 请注意，下载的过程可能会因您所在的地区、网络速度和其他因素而有所不同。确保您的计算机满足 Visual Studio Build Tools 的系统要求，并在安装之前备份重要数据。
+
+### 安装环境依赖
 ```bash
 git clone https://github.com/bifu123/langchain
 cd langchain
@@ -18,13 +36,8 @@ conda create -n langchain python=3.11
 conda activate langchain
 pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
 ```
-- 配置文件
-编辑config.py
-```python
-oembed_server = OllamaEmbeddings(base_url="http://192.168.66.24:11434", model="nomic-embed-text")
-ollama_server = Ollama(base_url='http://192.168.66.26:11434', model="gemma:7b")
-```
-oembed_server、ollama_server 为内建的ollama服务器，详情参见ollama文档:<br>
+- 修改配置文件
+编辑 config.py 各项配置，关于 ollama 可参见
 ollama入门：https://github.com/ollama/ollama <br>
 ollama文档：https://github.com/ollama/ollama/tree/main/docs
 

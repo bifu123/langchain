@@ -7,6 +7,7 @@ from pathlib import Path
 import shutil
 from fastapi import status
 from fastapi import Request
+
 from dal import *
 
 app = FastAPI()
@@ -91,7 +92,7 @@ async def upload_file(request: Request, file: UploadFile = File(...)):
     with open(file_path, "wb") as buffer:
         shutil.copyfileobj(file.file, buffer)
     #重新量化文档
-    processor = DocumentProcessor(data_path, db_path, oembed_server)
+    processor = DocumentProcessor(data_path, db_path, embedding)
     processor.update_database()
     
     from_value = request.query_params.get("from", None)  
@@ -114,7 +115,7 @@ async def delete_file(file_name: str):
     if file_path.exists():
         file_path.unlink()
         #重新量化文档
-        processor = DocumentProcessor(data_path, db_path, oembed_server)
+        processor = DocumentProcessor(data_path, db_path, embedding)
         processor.update_database()
         return {"message": f"文件 {file_name} 删除成功"}
         
