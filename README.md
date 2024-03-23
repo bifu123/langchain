@@ -63,6 +63,11 @@ QQ号：415135222
 QQ群：222302526 
 
 <hr>
+
+*** 2023-3-23 重要更新 ***
+- 更正了依赖环境安装错误
+- 增加gemini api的支持。
+
 *** 2023-3-19 重要更新 ***
 - 模型首选chinese-alpaca-llama2：https://github.com/ymcui/Chinese-LLaMA-Alpaca-2，中文理解能力强些。导入方法详见ollama入门文档。还没试过 chatGLM,不知道效果如何。
 - 增加对 world 、excel 等办公文档的支持。
