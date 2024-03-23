@@ -39,6 +39,8 @@ from urllib import request
 from bs4 import BeautifulSoup
 
 
+##############文件下载###############
+import requests
 
 
 os.environ['GOOGLE_API_KEY'] = GOOGLE_API_KEY #将GOOGLE_API_KEY加载到环境变量中
@@ -81,21 +83,9 @@ else:
 
 
 
-# # 加载文档
-# loader = DirectoryLoader(db_path, show_progress=True, use_multithreading=True)
-# docs = loader.load()
-# #print(docs)
-
-
-# # 分割文档
-# text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=128)
-# all_splits = text_splitter.split_documents(docs)
-# #print(all_splits)
-
 
 ######################################
 # 量化文档
-######################################
 class DocumentProcessor:
     def __init__(self, data_path, db_path, embedding):
         self.data_path = data_path
@@ -141,14 +131,30 @@ class DocumentProcessor:
 # processor.update_database()
 
 
+# 定义下载文件的函数
+def download_file(url: str, file_name: str, download_path: str):
+    # 下载文件
+    response = requests.get(url)
+
+    if response.status_code == 200:
+        # 检查下载目录是否存在，如果不存在则创建
+        if not os.path.exists(download_path):
+            os.makedirs(download_path)
+        
+        # 将文件保存到指定路径
+        file_path = os.path.join(download_path, file_name)
+        with open(file_path, 'wb') as f:
+            f.write(response.content)
+        
+        print(f"File downloaded successfully: {file_path}")
+    else:
+        print(f"Failed to download file from {url}")
 
 
 ######################################
 # 生成站点地图
-######################################
 '''要执行的url'''
 URL = 'http://cho.freesky.sbs'
-
 
 def build_sitemap(url):
     '''所有url列表'''
@@ -244,7 +250,6 @@ def build_sitemap(url):
         doc.writexml(fp, indent='\t', addindent='\t', newl='\n')
 
     return {"url":url, "sitemap":"./sitemap.xml"}
-
 
 # # 调用函数并输出结果
 # print(build_sitemap(URL))

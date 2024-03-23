@@ -1,0 +1,46 @@
+# 在DAL.PY中定义下载文件的函数
+def download_file(url: str, file_name: str, download_path: str):
+    # 下载文件
+    response = requests.get(url)
+
+    if response.status_code == 200:
+        # 检查下载目录是否存在，如果不存在则创建
+        if not os.path.exists(download_path):
+            os.makedirs(download_path)
+        
+        # 将文件保存到指定路径
+        file_path = os.path.join(download_path, file_name)
+        with open(file_path, 'wb') as f:
+            f.write(response.content)
+        
+        print(f"File downloaded successfully: {file_path}")
+    else:
+        print(f"Failed to download file from {url}")
+
+
+
+
+
+在main.py中增加路由
+# 从QQ接收文档
+@app.get("/upload_api/")
+async def upload_file(request: Request):
+    # 将文件保存到指定目录
+
+    
+    # 从请求数据中获取参数值
+    file_name = request.query_params.get("file_name", None)
+    file_url = request.query_params.get("file_url", None)
+    file_user = request.query_params.get("file_user", None)
+
+    print(file_url)
+    
+    # # 下载文档到用户文件夹
+    # file_save_path = os.path.join(data_path, file_user)
+    # download_file(file_url, file_name, file_save_path)
+
+    #重新量化文档
+    processor = DocumentProcessor(data_path, db_path, embedding)
+    processor.update_database()
+
+    return JSONResponse(content={"msg": "文档量化完成"})

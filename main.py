@@ -8,13 +8,13 @@ import shutil
 from fastapi import status
 from fastapi import Request
 
+
 from dal import *
+
+
 
 app = FastAPI()
 app.mount("/static", StaticFiles(directory="static"), name="static")
-
-
-# 接收POST传参
 
 
 templates = Jinja2Templates(directory="templates")
@@ -38,13 +38,7 @@ async def dummy_post():
 
 
 
-
-
-
-
-
-
-# 文档管理
+# 显示文件夹下所有文件的函数
 def get_files_in_directory(directory: Path):
     files = []
     for item in directory.iterdir():
@@ -55,6 +49,7 @@ def get_files_in_directory(directory: Path):
             files.extend(get_files_in_directory(item))  # 递归获取子文件夹中的文件
     return files
 
+# 管理文档
 @app.get("/manager_files")
 async def read_files(request: Request):
     files_names = get_files_in_directory(file_directory)
@@ -64,27 +59,15 @@ async def read_files(request: Request):
     # 获取文件名列表
     # files_names = [file.name for file in file_directory.glob("*")]  
     # 获取名为 "from" 的查询参数
-    from_value = request.query_params.get("from", None)  
-    if from_value == "qq":
+    from_value = request.query_params.get("type", None)  
+    if from_value == "api":
         return JSONResponse(content={"files": files_names})
     
     else:
         return templates.TemplateResponse("manager_files.html", {"request": request, "files": files})
 
 
-
-
-
-
-
-
-
-# 上传文档
-'''
-{'name': '3E6A8972499BB1FBF59DF805A690DAB3.png', 'size': 121668, 'url': 'http://49.86.42.149/ftn_handler/b5b1fbd33abb0556b72184bfa6db902db8637a57f9696cb59a3114bc4f34ae9d16f72940f381e87af6f0e66d852ce1e5e0a0a0ae8f88c1c5c1d175464f6e8aab'}, 'user_id': 415135222}
-'''
-from fastapi import Request
-
+# 从WEB上传文档
 @app.post("/upload/")
 async def upload_file(request: Request, file: UploadFile = File(...)):
     # 将文件保存到指定目录
@@ -94,21 +77,11 @@ async def upload_file(request: Request, file: UploadFile = File(...)):
     #重新量化文档
     processor = DocumentProcessor(data_path, db_path, embedding)
     processor.update_database()
-    
-    from_value = request.query_params.get("from", None)  
-    if from_value == "qq":
-        return JSONResponse(content={"msg": "文档量化完成"})
-    else:
-        return RedirectResponse(url="/manager_files", status_code=status.HTTP_303_SEE_OTHER)
+    # 跳转
+    return RedirectResponse(url="/manager_files", status_code=status.HTTP_303_SEE_OTHER)
 
 
-
-
-
-
-
-
-
+# 删除文档
 @app.delete("/delete/{file_name}")
 async def delete_file(file_name: str):
     file_path = file_directory / file_name
@@ -122,6 +95,33 @@ async def delete_file(file_name: str):
     else:
         raise HTTPException(status_code=404, detail=f"文件 {file_name} 未找到")
     
+
+# 从QQ接收文档
+@app.get("/upload_api/")
+async def upload_file(request: Request):
+    # 将文件保存到指定目录
+
+    
+    # 从请求数据中获取参数值
+    file_name = request.query_params.get("file_name", None)
+    file_url = request.query_params.get("file_url", None)
+    file_user = request.query_params.get("file_user", None)
+
+    print(file_url)
+    
+    # 下载文档到用户文件夹
+    file_save_path = os.path.join(data_path, file_user)
+    download_file(file_url, file_name, file_save_path)
+
+    #重新量化文档
+    processor = DocumentProcessor(data_path, db_path, embedding)
+    processor.update_database()
+
+    return JSONResponse(content={"msg": "文档量化完成"})
+
+
+
+
 
 
 if __name__ == "__main__":

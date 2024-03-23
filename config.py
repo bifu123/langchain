@@ -8,7 +8,7 @@ data_path = "./data"
 
 
 ################ gemini api key #####
-GOOGLE_API_KEY = "YOUR GEMINI API KEY"
+GOOGLE_API_KEY = "your gemini api key"
 #gemini api key的申请地址：https://makersuite.google.com/app/prompts/new_freeform ，条件：拥有google帐号
 #####################################
 
@@ -41,7 +41,7 @@ llm_gemini_conf = {
 
 ################ 模型选择 ############
 model_choice = {
-    "embedding":"goole", # embedding: ollama | google
+    "embedding":"google", # embedding: ollama | google
     "llm": "gemini" # llm: ollama | gemini
 }
 #####################################
